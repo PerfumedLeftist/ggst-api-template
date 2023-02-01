@@ -1,5 +1,5 @@
 use serde_derive::{Deserialize, Serialize};
-
+use dotenv::dotenv;
 const VERSION: &str = "0.1.7";
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -49,7 +49,7 @@ pub fn generate_replay_request(
 ) -> Request<ReplayRequest> {
     Request {
         header: RequestHeader {
-            player_id: "76561198398126607".to_owned(),
+            player_id: std::env::var("RCODE_ID").unwrap(),
             token: token.to_owned(),
             int1: 2,
             version: VERSION.to_owned(),

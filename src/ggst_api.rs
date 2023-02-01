@@ -16,7 +16,6 @@ pub async fn get_replays() -> Result<Vec<responses::Replay>, String> {
     for i in 0..10 {
         let request_data = requests::generate_replay_request(i, 127, &token);
         let request_data = encrypt_data(&request_data);
-        let lol = request_data.clone();
         let client = reqwest::Client::new();
         let form = client
             .post("https://ggst-game.guiltygear.com/api/catalog/get_replay")
@@ -25,8 +24,6 @@ pub async fn get_replays() -> Result<Vec<responses::Replay>, String> {
             .header(header::CONTENT_TYPE, "application/x-www-form-urlencoded")
             .header("x-client-version", "1")
             .form(&[("data", request_data)]);
-        println!("{:?}", &form);
-
         let response = form.send().await.unwrap();
         let response_bytes = response.bytes().await.unwrap();
         if let Ok(r) = decrypt_response::<responses::Replays>(&response_bytes) {

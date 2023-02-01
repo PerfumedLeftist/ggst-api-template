@@ -12,12 +12,12 @@ from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from msgpack import packb, unpackb
 from struct import pack
-
+from decouple import config
 def main():
-    user = ""
-    password = ""
+    user = config("STEAM_USER")
+    password = config("STEAM_PASSWORD")
     token = login(user, password)
-    #replays = get_replays(token)
+    replays = get_replays(token)
     #print(replays)
 
 
@@ -148,7 +148,7 @@ key = unhexlify('EEBC1F57487F51921C0465665F8AE6D1658BB26DE6F8A069A3520293A572078
 
 def get_replays(token):
     data_header = [
-        "76561198398126607",
+        config("RCODE_ID"),
         token,
         2,
         "0.1.7",
