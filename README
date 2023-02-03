@@ -1,3 +1,17 @@
 Files ggst_api.rs, requests.rs responses.rs and generate_token.py are licensed by GitHub user Felix "halvnykterist" under the MIT license. [Link to license](https://github.com/halvnykterist/rating-update/blob/master/LICENSE)
 
 Any modifications created by me are unlicensed. 
+
+Steps: 
+1. Edit the example.env into .env. Fill in the fields. RCODE_ID is your r-code ID, which can be found on the bottom of your profile. the two other fields are your steam username and password.
+2. Generate a virtual environment and enter it
+3. Install from the requirements.txt
+4. Run the python script. It should say something like
+```
+Successfully logged in
+Strive token obtained for user: <your steam id> - <token>
+```
+It will wait a little bit and then close. that should mean you have gotten the replays successfully, so go to line 20 and comment that out, and proceed.
+5. `cargo run`. This should install all the packages you need, attempt to get replays, and print them out. If you see alot of JSON get spit out after a little bit, that means success. 
+
+If you need a new token, just run generate_token.py again.
